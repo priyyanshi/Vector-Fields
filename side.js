@@ -8,7 +8,8 @@ const l = (p) => {
   }
 
   p.draw = function() {
-    p.background(250)
+    p.background(35)
+    
   }
 
   center_inputs = function() {

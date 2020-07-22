@@ -10,6 +10,7 @@ const s = (p) => {
   var x_comp, y_comp, z_comp, slider, s_val, slider1, s_val1, help_button
   var parser = math.parser()
   var field = ['0','0','0']
+
  
   var state1 = {
     distance : 300,
@@ -33,13 +34,16 @@ const s = (p) => {
   }
 
   p.draw = function() {
+    p.background(10)
+
     easycam.update()
     easycam.setRotation(Dw.Rotation.create({angles_xyz:[8*p.PI, 8*p.PI, 9*p.PI]}), 50000)
-    p.background(15)
+    
     draw_grid()
     draw_field()
     adjust_vectors()
   }
+
 
   adjust_vectors = function() {
     if (slider1.value() == 1) increment = 45
@@ -88,7 +92,14 @@ const s = (p) => {
     sel.option('F(x,y,z) = (1)î + (0)ĵ + (0)k̂')
     sel.option('F(x,y,z) = (1)î + (sin(y))ĵ + (0)k̂')
     sel.selected('Examples')
-    sel.changed(mySelectEvent);
+    sel.changed(mySelectEvent)
+
+    sel.position(0.7*p.windowWidth,0.45*p.windowHeight)
+    sel.size(0.3*p.windowWidth,0.07*p.windowHeight)
+    sel.style('background-color', p.color(115,115,115,255))
+    sel.style('color', p.color(10,10,10,255))
+    sel.style('padding-left','150px')
+    sel.style('outline','0')
   }
 
   mySelectEvent = function() {
@@ -129,6 +140,29 @@ const s = (p) => {
 
   vector_inputs = function() {
 
+    var sidebar = p.createDiv()
+    sidebar.position(0.7*p.windowWidth,0)
+    sidebar.size(0.3*p.windowWidth,p.windowHeight)
+    sidebar.style('background-color', p.color(255,0,0,0))
+    sidebar.style('box-shadow', '0px 0px 5px 5px rgba(0,0,0,0.5)')
+
+    let header = p.createDiv('Input Vector Field')
+    header.position(0.7*p.windowWidth,0)
+    header.size(0.3*p.windowWidth,0.05*p.windowHeight)
+    header.style('background-color', p.color(115,115,115,255))
+    header.style('text-align', 'center')
+    header.style('color', p.color(10,10,10,255))
+    header.style('padding-top','15px')
+
+    // let fieldinput = p.createDiv('')
+    // fieldinput.position(0.7*p.windowWidth,0.05*p.windowHeight+15)
+    // fieldinput.size(0.3*p.windowWidth,0.162*p.windowHeight)
+    // fieldinput.style('background-color', p.color(40,40,40,255))
+    // fieldinput.style('text-align', 'center')
+    // fieldinput.style('color', p.color(250,250,250,255))
+    // fieldinput.style('padding-top','15px')
+    // fieldinput.style('box-shadow', 'inset 0px 0px 2px 2px rgba(0,0,0,0.5)')
+
     x_comp = p.createInput()
     x_comp.position(0.85*p.windowWidth,50)
     x_comp.size(0.05*p.windowWidth,15)
@@ -162,6 +196,23 @@ const s = (p) => {
     v_div = p.createDiv('F(x, y, z) = ')
     v_div.position(0.71*p.windowWidth,y_comp.y-1)
 
+    let scale = p.createDiv('Scaling Vector')
+    scale.position(0.7*p.windowWidth,0.25*p.windowHeight)
+    scale.size(0.3*p.windowWidth,0.05*p.windowHeight)
+    scale.style('background-color', p.color(115,115,115,255))
+    scale.style('text-align', 'center')
+    scale.style('color', p.color(10,10,10,255))
+    scale.style('padding-top','15px')
+
+    // let scaleinput = p.createDiv('')
+    // scaleinput.position(0.7*p.windowWidth,0.30*p.windowHeight+15)
+    // scaleinput.size(0.3*p.windowWidth,0.112*p.windowHeight)
+    // scaleinput.style('background-color', p.color(20,20,20,255))
+    // scaleinput.style('text-align', 'center')
+    // scaleinput.style('color', p.color(250,250,250,255))
+    // scaleinput.style('padding-top','15px')
+    // scaleinput.style('box-shadow', 'inset 0px 0px 2px 2px rgba(0,0,0,0.5)')
+
     slider = p.createSlider(0,10,1,0.2)
     slider.position(0.75*p.windowWidth, 200)
     s_val = p.createDiv(slider.value())
@@ -171,6 +222,15 @@ const s = (p) => {
     slider1.position(0.75*p.windowWidth, 250)
     s_val1 = p.createDiv(slider1.value())
     s_val1.position(0.75*p.windowWidth, 270)
+
+    // let space = p.createDiv('')
+    // space.position(0.7*p.windowWidth,0.5*p.windowHeight+15)
+    // space.size(0.3*p.windowWidth,0.462*p.windowHeight)
+    // space.style('background-color', p.color(20,20,20,255))
+    // space.style('text-align', 'center')
+    // space.style('color', p.color(250,250,250,255))
+    // space.style('padding-top','15px')
+    // space.style('box-shadow', 'inset 0px 0px 2px 2px rgba(0,0,0,0.5)')
   }
 
   draw_field = function() {
@@ -195,16 +255,17 @@ const s = (p) => {
           let v1 = p.createVector((x_inp*val), (y_inp*val), (z_inp*val))
       
           p.push()
-          p.stroke(200,200,0)
+          p.stroke(255,255,255)
+          p.ambientMaterial(250)
           p.translate(v0.x,v0.y,v0.z)
           p.strokeWeight(0.7)
           p.line(0,0,0,v1.x,v1.y,v1.z)
           p.translate((x_inp*val), (y_inp*val), (z_inp*val))
-          p.fill(255,0,0)
+          p.fill(255,255,255)
           p.sphere(1.5)
-          p.translate(0.03*(x_inp*val), 0.03*(y_inp*val), 0.03*(z_inp*val))
-          p.sphere(1)
           p.translate(0.02*(x_inp*val), 0.02*(y_inp*val), 0.02*(z_inp*val))
+          p.sphere(1)
+          p.translate(0.01*(x_inp*val), 0.01*(y_inp*val), 0.01*(z_inp*val))
           p.sphere(0.5)
           p.pop()
         }
