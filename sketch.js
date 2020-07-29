@@ -1,3 +1,4 @@
+
 let center = [0,0,0]
 
 const s = (p) => {
@@ -10,6 +11,8 @@ const s = (p) => {
   var x_comp, y_comp, z_comp, slider, s_val, slider1, s_val1, help_button
   var parser = math.parser()
   var field = ['0','0','0']
+  var help_div
+  var show = false
 
  
   var state1 = {
@@ -19,7 +22,7 @@ const s = (p) => {
   };
 
   p.preload = function() {
-    myFont = p.loadFont('./fonts/Inconsolata-Black.ttf')
+    myFont = p.loadFont('./fonts/rob.ttf')
   }
 
   p.setup = function() {
@@ -31,11 +34,13 @@ const s = (p) => {
     vector_inputs()
     common_fields()
     help()
+
   }
 
   p.draw = function() {
-    p.background(10)
+    p.background(15)
 
+    p.textFont(myFont, 0.015*p.windowWidth)
     easycam.update()
     easycam.setRotation(Dw.Rotation.create({angles_xyz:[8*p.PI, 8*p.PI, 9*p.PI]}), 50000)
     
@@ -55,14 +60,14 @@ const s = (p) => {
     p.strokeWeight(0.8)
     p.push()
     // x axis: red
-    p.stroke(250,0,0)
+    p.stroke(245,75,66)
     p.line(-1*length,-1*center[1],-1*center[2],length,-1*center[1],-1*center[2])
     p.pop()
     // y axis: green
-    p.stroke(0,250,0)
+    p.stroke(66,245,114)
     p.line(-1*center[0],-1*length,-1*center[2],-1*center[0],length,-1*center[2])
     // z axis: blue 
-    p.stroke(0,0,250)
+    p.stroke(66,90,245)
     p.line(-1*center[0],-1*center[1],-1*length,-1*center[0],-1*center[1],length)
     
     for (var i=-1*length ; i<length; i+=20){
@@ -85,8 +90,8 @@ const s = (p) => {
   common_fields = function() {
     p.textAlign(p.CENTER)
     sel = p.createSelect()
-    sel.position(p.windowWidth*0.735, p.windowHeight*0.4)
-    sel.option('Examples')
+    sel.position(p.windowWidth*0.85, p.windowHeight*0.7)
+    sel.option('')
     sel.option('F(x,y,z) = (x)î + (y)ĵ + (z)k̂')
     sel.option('F(x,y,z) = (-y)î + (x)ĵ + (z)k̂')
     sel.option('F(x,y,z) = (1)î + (0)ĵ + (0)k̂')
@@ -94,12 +99,11 @@ const s = (p) => {
     sel.selected('Examples')
     sel.changed(mySelectEvent)
 
-    sel.position(0.7*p.windowWidth,0.45*p.windowHeight)
-    sel.size(0.3*p.windowWidth,0.07*p.windowHeight)
-    sel.style('background-color', p.color(115,115,115,255))
-    sel.style('color', p.color(10,10,10,255))
-    sel.style('padding-left','150px')
-    sel.style('outline','0')
+    sel.size(0.15*p.windowWidth,0.075*p.windowHeight)
+    sel.style('background-color', p.color(54,54,54,255))
+    sel.style('color', p.color(250,250,250,255))
+    sel.style('padding-left', '10px')
+    sel.style('border','none')
   }
 
   mySelectEvent = function() {
@@ -139,6 +143,10 @@ const s = (p) => {
   }
 
   vector_inputs = function() {
+    var width = 0.03*p.windowWidth
+    var height = 40
+    var b_width = 0.12*(p.windowWidth)
+    var b_height = 40
 
     var sidebar = p.createDiv()
     sidebar.position(0.7*p.windowWidth,0)
@@ -146,91 +154,70 @@ const s = (p) => {
     sidebar.style('background-color', p.color(255,0,0,0))
     sidebar.style('box-shadow', '0px 0px 5px 5px rgba(0,0,0,0.5)')
 
-    let header = p.createDiv('Input Vector Field')
-    header.position(0.7*p.windowWidth,0)
-    header.size(0.3*p.windowWidth,0.05*p.windowHeight)
-    header.style('background-color', p.color(115,115,115,255))
-    header.style('text-align', 'center')
-    header.style('color', p.color(10,10,10,255))
-    header.style('padding-top','15px')
-
-    // let fieldinput = p.createDiv('')
-    // fieldinput.position(0.7*p.windowWidth,0.05*p.windowHeight+15)
-    // fieldinput.size(0.3*p.windowWidth,0.162*p.windowHeight)
-    // fieldinput.style('background-color', p.color(40,40,40,255))
-    // fieldinput.style('text-align', 'center')
-    // fieldinput.style('color', p.color(250,250,250,255))
-    // fieldinput.style('padding-top','15px')
-    // fieldinput.style('box-shadow', 'inset 0px 0px 2px 2px rgba(0,0,0,0.5)')
-
+    
     x_comp = p.createInput()
-    x_comp.position(0.85*p.windowWidth,50)
-    x_comp.size(0.05*p.windowWidth,15)
-    x_div = p.createDiv('î')
-    x_div.position(x_comp.width+x_comp.x+ 8,x_comp.y)
+    x_comp.position(0.79*p.windowWidth,0.3*p.windowHeight)
+    x_comp.size(b_width,b_height)
+    x_comp.style('text-align', 'center')
+    x_comp.style('font-size', '30px')
 
     x = p.createButton('✓')
     x.position(0.94*p.windowWidth, x_comp.y)
+    x.size(width,height)
+    x.style('background-color', p.color(55,55,55))
+    x.style('color', p.color(255,255,255))
+    x.style('border', 'none')
+    x.style('border-radius', '4px')
+    x.style('font-size', '28px')
     x.mousePressed(update_x)
 
     y_comp = p.createInput()
     y_comp.position(x_comp.x,x_comp.y+x_comp.height+10)
-    y_comp.size(0.05*p.windowWidth,15)
-    y_div = p.createDiv('ĵ')
-    y_div.position(x_comp.width+x_comp.x+ 8,y_comp.y-1)
-
+    y_comp.size(b_width,b_height)
+    y_comp.style('text-align', 'center')
+    y_comp.style('font-size', '30px')
+    
     y = p.createButton('✓')
     y.position(0.94*p.windowWidth, y_comp.y)
+    y.size(width,height)
+    y.style('background-color', p.color(55,55,55))
+    y.style('color', p.color(255,255,255))
+    y.style('border', 'none')
+    y.style('border-radius', '4px')
+    y.style('font-size', '28px')
     y.mousePressed(update_y)
 
     z_comp = p.createInput()
     z_comp.position(x_comp.x,y_comp.y+y_comp.height+10)
-    z_comp.size(0.05*p.windowWidth,15)
-    z_div = p.createDiv('k̂')
-    z_div.position(x_comp.width+x_comp.x+ 6,z_comp.y+3)
+    z_comp.size(b_width,b_height)
+    z_comp.style('text-align', 'center')
+    z_comp.style('font-size', '30px')
 
     z = p.createButton('✓')
     z.position(0.94*p.windowWidth, z_comp.y)
+    z.size(width,height)
+    z.style('background-color', p.color(55,55,55))
+    z.style('color', p.color(255,255,255))
+    z.style('border', 'none')
+    z.style('border-radius', '4px')
+    z.style('font-size', '28px')
     z.mousePressed(update_z)
 
-    v_div = p.createDiv('F(x, y, z) = ')
-    v_div.position(0.71*p.windowWidth,y_comp.y-1)
 
-    let scale = p.createDiv('Scaling Vector')
-    scale.position(0.7*p.windowWidth,0.25*p.windowHeight)
-    scale.size(0.3*p.windowWidth,0.05*p.windowHeight)
-    scale.style('background-color', p.color(115,115,115,255))
-    scale.style('text-align', 'center')
-    scale.style('color', p.color(10,10,10,255))
-    scale.style('padding-top','15px')
 
-    // let scaleinput = p.createDiv('')
-    // scaleinput.position(0.7*p.windowWidth,0.30*p.windowHeight+15)
-    // scaleinput.size(0.3*p.windowWidth,0.112*p.windowHeight)
-    // scaleinput.style('background-color', p.color(20,20,20,255))
-    // scaleinput.style('text-align', 'center')
-    // scaleinput.style('color', p.color(250,250,250,255))
-    // scaleinput.style('padding-top','15px')
-    // scaleinput.style('box-shadow', 'inset 0px 0px 2px 2px rgba(0,0,0,0.5)')
-
-    slider = p.createSlider(0,10,1,0.2)
-    slider.position(0.75*p.windowWidth, 200)
-    s_val = p.createDiv(slider.value())
-    s_val.position(0.75*p.windowWidth, 220)
+    slider = p.createSlider(0.2,10,1,0.2)
+    slider.position(0.78*p.windowWidth, 0.61*p.windowHeight)
+    slider.size(0.19*p.windowWidth,10)
+    //slider.style()
+    // s_val = p.createDiv(slider.value())
+    // s_val.position(0.75*p.windowWidth, 520)
 
     slider1 = p.createSlider(1,3,1,1)
-    slider1.position(0.75*p.windowWidth, 250)
-    s_val1 = p.createDiv(slider1.value())
-    s_val1.position(0.75*p.windowWidth, 270)
+    slider1.position(0.78*p.windowWidth, 0.66*p.windowHeight)
+    slider1.size(0.19*p.windowWidth,10)
+    // s_val1 = p.createDiv(slider1.value())
+    // s_val1.position(0.75*p.windowWidth, 570)
 
-    // let space = p.createDiv('')
-    // space.position(0.7*p.windowWidth,0.5*p.windowHeight+15)
-    // space.size(0.3*p.windowWidth,0.462*p.windowHeight)
-    // space.style('background-color', p.color(20,20,20,255))
-    // space.style('text-align', 'center')
-    // space.style('color', p.color(250,250,250,255))
-    // space.style('padding-top','15px')
-    // space.style('box-shadow', 'inset 0px 0px 2px 2px rgba(0,0,0,0.5)')
   }
 
   draw_field = function() {
@@ -239,9 +226,9 @@ const s = (p) => {
       for (var i = (-1*size)+center[0]; i <= (size)+center[0]; i += increment) {
         for (var j = (-1*size)+center[1]; j <= (size)+center[1]; j+=increment) {
           let val = slider.value()
-          s_val.html(val)
-          let val2 = slider1.value()
-          s_val1.html(val2)
+          // s_val.html(val)
+          // let val2 = slider1.value()
+          // s_val1.html(val2)
 
           parser.evaluate('x='+i)
           parser.evaluate('y='+j)
@@ -275,12 +262,23 @@ const s = (p) => {
 
   help = function() {
     help_button = p.createButton('Help?')
-    help_button.position(0.8*p.windowWidth, 0.6*p.windowHeight)
+    help_button.position(0.8*p.windowWidth, 0.85*p.windowHeight)
+    help_button.size(0.1*p.windowWidth, 50)
+    help_button.style('background-color', p.color(44,44,44,255))
+    help_button.style('color', p.color(255,255,255))
+    help_button.style('border', 'none')
+    help_button.style('border-radius', '4px')
+    help_button.style('font-size', '20px')
     help_button.mousePressed(help_info)
   }
 
   help_info = function() {
-    alert('Hello')
+    console.log(show)
+    if (show) {
+      show = false
+    } else {
+      show = true
+    }
   }
 }
 
