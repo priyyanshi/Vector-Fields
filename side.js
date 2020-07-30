@@ -24,21 +24,21 @@ const l = (p) => {
     p.noStroke()
     p.fill(35,35,40,255)
     c_input = p.createDiv(
-      '<img style="width:50%; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/lighter_center.png"/>'
+      '<img style="width:50%; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/Center.png"/>'
     )
     c_input.size(0.3*p.windowWidth,0.075*p.windowHeight)
     c_input.position(0.7*p.windowWidth,0)
     c_input.style('background', p.color(40,40,40,255))
 
     v_input = p.createDiv(
-      '<img style="width:47%; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/Color_Vector.png"/>'
+      '<img style="width:47%; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/Input.png"/>'
     )
     v_input.size(0.30*p.windowWidth,0.075*p.windowHeight)
     v_input.position(0.7*p.windowWidth,0.2*p.windowHeight)
     v_input.style('background', p.color(40,40,40,255))
 
     s_input = p.createDiv(
-      '<img style="width:42%; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/Color_Scale.png"/>'
+      '<img style="width:42%; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/Scale.png"/>'
     )
     s_input.size(0.3*p.windowWidth,0.075*p.windowHeight)
     s_input.position(0.7*p.windowWidth,0.5*p.windowHeight)
