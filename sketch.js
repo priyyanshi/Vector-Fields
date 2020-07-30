@@ -77,6 +77,7 @@ const s = (p) => {
       '<p style="font-size:30px;text-align:center"> Click the ? button for the user guide and instructions! </p>'
     )
     welcome.size(2/6*p.windowWidth,3/5*p.windowHeight)
+    welcome.position(-1500,-1500)
     welcome.style('background', p.color(40,40,40,255))
     welcome.style('color', p.color(140,140,140,255))
     welcome.style('font-family', "Helvetica")
@@ -94,6 +95,8 @@ const s = (p) => {
 
     close_intro = p.createButton('OK')
     close_intro.size(0.367*p.windowWidth,0.08*p.windowHeight)
+    close_intro.position(-1500,-1500)
+
     close_intro.style('border', 'none')
     close_intro.style('border-radius', '5px')
     close_intro.style('background-color', p.color(140,140,140,255))
@@ -401,6 +404,7 @@ const s = (p) => {
       '<img style="width:27%;display:block;" src="./pics/Examples.png"/>' +
       '<ul> <li> A few examples of vector fields are provided in the Examples dropdown to help you get started.</li> </ul> <br/>'  
       )
+    help_div.position(-1500,-1500)
     help_div.size(2/6*p.windowWidth,3/5*p.windowHeight)
     help_div.style('background', p.color(40,40,40))
     help_div.style('color', p.color(140,140,140))
@@ -417,6 +421,7 @@ const s = (p) => {
     help_div.style('box-shadow', '0px 0px 5px 1px rgba(40,40,40,40.75)')
 
     close = p.createButton('X')
+    close.position(-1500,-1500)
     close.size(0.02*p.windowWidth,0.02*p.windowWidth)
     close.style('border', 'none')
     close.style('font-size', '20px')
