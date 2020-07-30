@@ -1,4 +1,9 @@
 
+var x_comp, y_comp, z_comp, slider, s_val, slider1, s_val1, help_button, x, y, z
+window.addEventListener('resize', function () { 
+  "use strict";
+  window.location.reload(); 
+});
 
 const s = (p) => {
   var center = [0,0,0]
@@ -8,7 +13,6 @@ const s = (p) => {
   let increment = 45
   var length = 1000
   var myFont
-  var x_comp, y_comp, z_comp, slider, s_val, slider1, s_val1, help_button, x, y, z
   var x_input, y_input, z_input, center_button
   var parser = math.parser()
   var field = ['0','0','0']
@@ -238,7 +242,8 @@ const s = (p) => {
 
 
     var i_width = 0.036*p.windowWidth
-    var i_height = 40
+    var i_height = 0.05*p.windowHeight
+    var font_size =0.014*p.windowWidth
 
     x_input = p.createInput()
     x_input.position(0.74*p.windowWidth,0.1*p.windowHeight)
@@ -265,12 +270,12 @@ const s = (p) => {
     center_button.style('color', p.color(255,255,255))
     center_button.style('border', 'none')
     center_button.style('border-radius', '4px')
-    center_button.style('font-size', '28px')
+    center_button.style('font-size', font_size+'px')
 
     center_button.mousePressed(update_center)
 
     x_comp = p.createInput()
-    x_comp.position(0.79*p.windowWidth,0.3*p.windowHeight)
+    x_comp.position(0.79*p.windowWidth,0.32*p.windowHeight)
     x_comp.size(b_width,b_height)
     x_comp.style('text-align', 'center')
     x_comp.style('font-size', '20px')
@@ -282,11 +287,11 @@ const s = (p) => {
     x.style('color', p.color(255,255,255))
     x.style('border', 'none')
     x.style('border-radius', '4px')
-    x.style('font-size', '28px')
+    x.style('font-size', font_size+'px')
     x.mousePressed(update_x)
 
     y_comp = p.createInput()
-    y_comp.position(x_comp.x,x_comp.y+x_comp.height+10)
+    y_comp.position(x_comp.x,x_comp.y+x_comp.height)
     y_comp.size(b_width,b_height)
     y_comp.style('text-align', 'center')
     y_comp.style('font-size', '20px')
@@ -298,11 +303,11 @@ const s = (p) => {
     y.style('color', p.color(255,255,255))
     y.style('border', 'none')
     y.style('border-radius', '4px')
-    y.style('font-size', '28px')
+    y.style('font-size', font_size+'px')
     y.mousePressed(update_y)
 
     z_comp = p.createInput()
-    z_comp.position(x_comp.x,y_comp.y+y_comp.height+10)
+    z_comp.position(x_comp.x,y_comp.y+y_comp.height)
     z_comp.size(b_width,b_height)
     z_comp.style('text-align', 'center')
     z_comp.style('font-size', '20px')
@@ -314,7 +319,7 @@ const s = (p) => {
     z.style('color', p.color(255,255,255))
     z.style('border', 'none')
     z.style('border-radius', '4px')
-    z.style('font-size', '28px')
+    z.style('font-size', font_size+'px')
     z.mousePressed(update_z)
 
     slider = p.createSlider(0.2,10,1,0.2)

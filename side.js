@@ -1,3 +1,8 @@
+window.addEventListener('resize', function () { 
+  "use strict";
+  window.location.reload(); 
+});
+
 const l = (p) => {
   var c_input, v_input, s_input, e_input, vx, vy, vz, func, size, amount, eye, jay, kay
   p.preload = function() {
@@ -65,13 +70,13 @@ const l = (p) => {
       '<img style="width:auto; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/y.png"/>'
     )
     vy.size(0.015*p.windowWidth,0.03*p.windowHeight)
-    vy.position(0.787*p.windowWidth,0.11*p.windowHeight)
+    vy.position(0.79*p.windowWidth,0.11*p.windowHeight)
 
     vz = p.createDiv(
       '<img style="width:auto; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/z.png"/>'
     )
     vz.size(0.015*p.windowWidth,0.03*p.windowHeight)
-    vz.position(0.855*p.windowWidth,0.11*p.windowHeight)
+    vz.position((0.86*p.windowWidth),0.11*p.windowHeight)
 
     func = p.createDiv(
       '<img style="width:auto; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/func.png"/>'
@@ -96,7 +101,7 @@ const l = (p) => {
       'î'
     )
     eye.size(0.027*p.windowWidth,0.027*p.windowHeight)
-    eye.position(0.93*p.windowWidth,0.31*p.windowHeight)
+    eye.position(0.93*p.windowWidth,0.325*p.windowHeight)
     eye.style('color', p.color(240,240,240,255))
     eye.style('font-size', font_size+'px')
 
@@ -105,7 +110,7 @@ const l = (p) => {
       'ĵ'
     )
     jay.size(0.027*p.windowWidth,0.026*p.windowHeight)
-    jay.position(0.93*p.windowWidth,0.365*p.windowHeight)
+    jay.position(0.93*p.windowWidth,0.368*p.windowHeight)
     jay.style('color', p.color(240,240,240,255))
     jay.style('font-size', font_size+'px')
 
@@ -114,7 +119,7 @@ const l = (p) => {
       'k̂'
     )
     kay.size(0.027*p.windowWidth,0.026*p.windowHeight)
-    kay.position(0.929*p.windowWidth,0.425*p.windowHeight)
+    kay.position(0.929*p.windowWidth,0.42*p.windowHeight)
     kay.style('color', p.color(240,240,240,255))
     kay.style('font-size', 0.013*p.windowWidth+'px')
 
