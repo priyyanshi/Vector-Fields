@@ -1,7 +1,7 @@
 window.addEventListener('resize', function () { 
   "use strict";
   window.location.reload(); 
-});
+})
 
 const l = (p) => {
   var c_input, v_input, s_input, e_input, vx, vy, vz, func, size, amount, eye, jay, kay

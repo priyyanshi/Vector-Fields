@@ -1,9 +1,8 @@
 
-var x_comp, y_comp, z_comp, slider, s_val, slider1, s_val1, help_button, x, y, z
 window.addEventListener('resize', function () { 
   "use strict";
   window.location.reload(); 
-});
+})
 
 const s = (p) => {
   var center = [0,0,0]
@@ -19,7 +18,11 @@ const s = (p) => {
   var help_div, close, welcome, close_intro
   var show = false
   var show_intro = true 
- 
+  var x_comp, y_comp, z_comp, slider, s_val, slider1, s_val1, help_button, x, y, z
+  var error 
+  var duration = 50
+  var show_error = false 
+
   var state1 = {
     distance : 300,
     center   : [0,0,0],
@@ -41,12 +44,12 @@ const s = (p) => {
     common_fields()
     help()
     intro()
+    error()
 
   }
 
   p.draw = function() {
 
-    console.log(show_intro, show)
     p.background(5)
 
     p.textFont(myFont, 0.015*p.windowWidth)
@@ -72,6 +75,15 @@ const s = (p) => {
     } else {
       help_div.position(0.15*p.windowWidth, 1/5*p.windowHeight)
       close.position(0.15*p.windowWidth+3, 1/5*p.windowHeight+3)
+    }
+
+    if (show_error && duration>0) {
+      error.position(2,2)
+      duration--
+    } else if (duration <=0) {
+      error.position(-1500,-1500)
+      show_error = false 
+      duration = 50
     }
   }
 
@@ -110,6 +122,14 @@ const s = (p) => {
 
   }
 
+  error = function() {
+    error = p.createDiv('')
+    error.style('color', p.color(140,140,140,255))
+    error.style('font-size', 0.0125*p.windowWidth +'px')
+    error.style('font-family', 'Helvetica')
+    error.position(-1500,1500)
+
+  }
 
   adjust_vectors = function() {
     if (slider1.value() == 1) increment = 45
@@ -195,15 +215,46 @@ const s = (p) => {
   }
   
   update_x = function() {
-    field[0] = x_comp.value()
+    parser.evaluate("x=1")
+    parser.evaluate("y=1")
+    parser.evaluate("z=1")
+
+    try {
+      parser.evaluate(x_comp.value())
+      field[0] = x_comp.value()
+    } catch (err) {
+      error.html(err.toString() + '. <br/> Try again, see the user guide for further help.')
+      show_error = true 
+    }
   }
 
   update_y = function() {
-    field[1] = y_comp.value()
+    parser.evaluate("x=1")
+    parser.evaluate("y=1")
+    parser.evaluate("z=1")
+
+    try {
+      parser.evaluate(y_comp.value())
+      field[1] = y_comp.value()
+    } catch (err) {
+      error.html(err.toString() + '. <br/> Try again, see the user guide for further help.')
+      show_error = true 
+    }
   }
 
   update_z = function() {
-    field[2] = z_comp.value()
+    parser.evaluate("x=1")
+    parser.evaluate("y=1")
+    parser.evaluate("z=1")
+
+    try {
+      parser.evaluate(z_comp.value())
+      field[2] = z_comp.value()
+    } catch (err) {
+
+      error.html(err.toString() + '. <br/> Try again, see the user guide for further help.')
+      show_error = true 
+    }
   }
 
 
@@ -229,11 +280,7 @@ const s = (p) => {
 
 
   vector_inputs = function() {
-    var width = 0.03*p.windowWidth
-    var height = 0.04*p.windowHeight
-    var b_width = 0.12*(p.windowWidth)
-    var b_height = 0.04*p.windowHeight
-
+  
     var sidebar = p.createDiv()
     sidebar.position(0.7*p.windowWidth,0)
     sidebar.size(0.3*p.windowWidth,p.windowHeight)
@@ -264,7 +311,7 @@ const s = (p) => {
     z_input.size(i_width,i_height)
     
     center_button = p.createButton('✓')
-    center_button.position(z_input.x + 1.5*z_input.width , x_input.y+2)
+    center_button.position(0.94*p.windowWidth , x_input.y+2)
     center_button.size(i_width,i_height)
     center_button.style('background-color', p.color(55,55,55))
     center_button.style('color', p.color(255,255,255))
@@ -274,6 +321,11 @@ const s = (p) => {
 
     center_button.mousePressed(update_center)
 
+    var width = 0.03*p.windowWidth
+    var height = 0.04*p.windowHeight
+    var b_width = 0.115*(p.windowWidth)
+    var b_height = 0.045*p.windowHeight
+
     x_comp = p.createInput()
     x_comp.position(0.79*p.windowWidth,0.32*p.windowHeight)
     x_comp.size(b_width,b_height)
@@ -281,7 +333,7 @@ const s = (p) => {
     x_comp.style('font-size', '20px')
 
     x = p.createButton('✓')
-    x.position(0.94*p.windowWidth, x_comp.y+2)
+    x.position(0.94*p.windowWidth, 0.32*p.windowHeight)
     x.size(width,height)
     x.style('background-color', p.color(55,55,55))
     x.style('color', p.color(255,255,255))
@@ -291,13 +343,13 @@ const s = (p) => {
     x.mousePressed(update_x)
 
     y_comp = p.createInput()
-    y_comp.position(x_comp.x,x_comp.y+x_comp.height)
+    y_comp.position(x_comp.x,0.32*p.windowHeight+b_height)
     y_comp.size(b_width,b_height)
     y_comp.style('text-align', 'center')
     y_comp.style('font-size', '20px')
     
     y = p.createButton('✓')
-    y.position(0.94*p.windowWidth, y_comp.y+2)
+    y.position(0.94*p.windowWidth, 0.32*p.windowHeight+b_height)
     y.size(width,height)
     y.style('background-color', p.color(55,55,55))
     y.style('color', p.color(255,255,255))
@@ -307,13 +359,13 @@ const s = (p) => {
     y.mousePressed(update_y)
 
     z_comp = p.createInput()
-    z_comp.position(x_comp.x,y_comp.y+y_comp.height)
+    z_comp.position(x_comp.x,0.32*p.windowHeight+2*b_height)
     z_comp.size(b_width,b_height)
     z_comp.style('text-align', 'center')
     z_comp.style('font-size', '20px')
 
     z = p.createButton('✓')
-    z.position(0.94*p.windowWidth, z_comp.y+2)
+    z.position(0.94*p.windowWidth, 0.32*p.windowHeight+2*b_height)
     z.size(width,height)
     z.style('background-color', p.color(55,55,55))
     z.style('color', p.color(255,255,255))
@@ -361,6 +413,7 @@ const s = (p) => {
           parser.evaluate('y='+j)
           parser.evaluate('z='+k)
 
+          
           x_inp = parser.evaluate(field[0])
           y_inp = parser.evaluate(field[1])
           z_inp = parser.evaluate(field[2])
@@ -399,7 +452,7 @@ const s = (p) => {
       '<ul> <li>Visualizer is centered around (0,0,0) by default. </li> <li> To see the field at another point in space, enter the coordinates in the fields provided on the top-right. </li> </ul>' +
       '<br/>' +
       '<img style="width:52%;display:block;" src="./pics/Input.png"/>' +
-      '<ul> <li> Use * when to indicate multiplication, e.g. enter "x*y" not "xy". </li> <li> When using built-in function like sqrt() and sin(), be sure to include brackets, e.g. enter "sin(x)" not "sinx". </li></ul>' +
+      '<ul> <li> Use * when to indicate multiplication, e.g. enter "x*y" not "xy". </li> <li> When using built-in function like sqrt() and sin(), be sure to include brackets, e.g. enter "sin(x)" not "sinx". </li> <li> Use lowercase x,y and z when inputting vector fields.</li></ul>' +
       '<br/>' +
       '<img style="width:45%;display:block;" src="./pics/Scale.png"/>' +
       '<ul> <li> The Size slider scales the size of each vector.</li> <li>The Amount slider changes the number of vectors displayed.</li></ul>' +
