@@ -55,7 +55,7 @@ const s = (p) => {
 
     if (show_intro) {
       welcome.position(0.15*p.windowWidth, 0.2*p.windowHeight)
-      close_intro.position(0.15*p.windowWidth, 0.75*p.windowHeight+3)
+      close_intro.position(0.15*p.windowWidth+3, 1/5*p.windowHeight+3)
 
     } else {
       welcome.position(-1500,-1500)
@@ -73,7 +73,7 @@ const s = (p) => {
 
   intro = function() {
     welcome = p.createDiv(
-      '<img style="width:100%;display:block;margin-left:auto;margin-right:auto"" src="./pics/3D-VECTOR.png"/>' +
+      '<br/> <br/> <br/> <img style="width:100%;display:block;margin-left:auto;margin-right:auto"" src="./pics/3D-VECTOR.png"/>' +
       '<p style="font-size:30px;text-align:center"> Click the ? button for the user guide and instructions! </p>'
     )
     welcome.size(2/6*p.windowWidth,3/5*p.windowHeight)
@@ -93,17 +93,15 @@ const s = (p) => {
     welcome.style('box-shadow', '0px 0px 5px 1px rgba(40,40,40,40.75)')
 
 
-    close_intro = p.createButton('OK')
-    close_intro.size(0.367*p.windowWidth,0.08*p.windowHeight)
+    close_intro = p.createButton('X')
     close_intro.position(-1500,-1500)
-
+    close_intro.size(0.02*p.windowWidth,0.02*p.windowWidth)
     close_intro.style('border', 'none')
-    close_intro.style('border-radius', '5px')
-    close_intro.style('background-color', p.color(140,140,140,255))
-    close_intro.style('color', p.color(40,40,40,255))
-    close_intro.style('font-family', "Helvetica")
-    close_intro.style('font-size', '40px')
-    close_intro.style('font-weight', '800')
+    close_intro.style('font-size', '20px')
+    close_intro.style('border-radius', '20px')
+    close_intro.style('background-color', p.color(40,40,40,255))
+    close_intro.style('color', p.color(180,180,180,255))    
+    close_intro.position(-1500,-1500)
     close_intro.mousePressed(function() {show_intro = false})
 
   }
