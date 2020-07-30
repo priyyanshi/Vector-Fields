@@ -76,7 +76,7 @@ const l = (p) => {
       '<img style="width:auto; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/z.png"/>'
     )
     vz.size(0.015*p.windowWidth,0.03*p.windowHeight)
-    vz.position((0.86*p.windowWidth),0.11*p.windowHeight)
+    vz.position((0.855*p.windowWidth),0.11*p.windowHeight)
 
     func = p.createDiv(
       '<img style="width:auto; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/func.png"/>'
