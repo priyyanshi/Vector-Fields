@@ -1,5 +1,5 @@
 const l = (p) => {
-  var c_input, v_input, s_input, e_input, vx, vy, vz, func, size, amount
+  var c_input, v_input, s_input, e_input, vx, vy, vz, func, size, amount, eye, jay, kay
   p.preload = function() {
     myFont = p.loadFont('./fonts/rob.ttf')
   }
@@ -24,16 +24,16 @@ const l = (p) => {
     p.noStroke()
     p.fill(35,35,40,255)
     c_input = p.createDiv(
-      '<img style="width:50%; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/Color_Center.png"/>'
+      '<img style="width:50%; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/lighter_center.png"/>'
     )
     c_input.size(0.3*p.windowWidth,0.075*p.windowHeight)
     c_input.position(0.7*p.windowWidth,0)
     c_input.style('background', p.color(40,40,40,255))
 
     v_input = p.createDiv(
-      '<img style="width:46%; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/Color_Vector.png"/>'
+      '<img style="width:47%; height:auto; max-width:100%; max-height:100%; margin:auto; display:block; left:0; right:0; position:absolute; top:0; bottom:0;" src="./pics/Color_Vector.png"/>'
     )
-    v_input.size(0.3*p.windowWidth,0.075*p.windowHeight)
+    v_input.size(0.30*p.windowWidth,0.075*p.windowHeight)
     v_input.position(0.7*p.windowWidth,0.2*p.windowHeight)
     v_input.style('background', p.color(40,40,40,255))
 
@@ -90,14 +90,34 @@ const l = (p) => {
     )
     amount.size(0.057*p.windowWidth,0.026*p.windowHeight)
     amount.position(0.72*p.windowWidth,0.645*p.windowHeight)
+    
+    var font_size = 0.014*p.windowWidth
+    eye = p.createDiv(
+      'î'
+    )
+    eye.size(0.027*p.windowWidth,0.027*p.windowHeight)
+    eye.position(0.93*p.windowWidth,0.31*p.windowHeight)
+    eye.style('color', p.color(240,240,240,255))
+    eye.style('font-size', font_size+'px')
 
-    p.push()
-    p.textFont("Helvetica", 0.013*p.windowWidth)
-    p.fill(255)
-    p.text("î",0.225*p.windowWidth,0.28*p.windowHeight,0.1*p.windowWidth,0.075*p.windowHeight)
-    p.text("ĵ",0.225*p.windowWidth,0.335*p.windowHeight,0.1*p.windowWidth,0.075*p.windowHeight)
-    p.text("k̂",0.223*p.windowWidth,0.40*p.windowHeight,0.1*p.windowWidth,0.075*p.windowHeight)
-    p.pop()
+
+    jay = p.createDiv(
+      'ĵ'
+    )
+    jay.size(0.027*p.windowWidth,0.026*p.windowHeight)
+    jay.position(0.93*p.windowWidth,0.365*p.windowHeight)
+    jay.style('color', p.color(240,240,240,255))
+    jay.style('font-size', font_size+'px')
+
+
+    kay = p.createDiv(
+      'k̂'
+    )
+    kay.size(0.027*p.windowWidth,0.026*p.windowHeight)
+    kay.position(0.929*p.windowWidth,0.425*p.windowHeight)
+    kay.style('color', p.color(240,240,240,255))
+    kay.style('font-size', 0.013*p.windowWidth+'px')
+
     p.pop()
 
   }

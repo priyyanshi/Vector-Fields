@@ -275,7 +275,7 @@ const s = (p) => {
     x_comp.style('font-size', '20px')
 
     x = p.createButton('✓')
-    x.position(0.94*p.windowWidth, x_comp.y)
+    x.position(0.94*p.windowWidth, x_comp.y+2)
     x.size(width,height)
     x.style('background-color', p.color(55,55,55))
     x.style('color', p.color(255,255,255))
@@ -291,7 +291,7 @@ const s = (p) => {
     y_comp.style('font-size', '20px')
     
     y = p.createButton('✓')
-    y.position(0.94*p.windowWidth, y_comp.y)
+    y.position(0.94*p.windowWidth, y_comp.y+2)
     y.size(width,height)
     y.style('background-color', p.color(55,55,55))
     y.style('color', p.color(255,255,255))
@@ -307,7 +307,7 @@ const s = (p) => {
     z_comp.style('font-size', '20px')
 
     z = p.createButton('✓')
-    z.position(0.94*p.windowWidth, z_comp.y)
+    z.position(0.94*p.windowWidth, z_comp.y+2)
     z.size(width,height)
     z.style('background-color', p.color(55,55,55))
     z.style('color', p.color(255,255,255))
@@ -315,8 +315,6 @@ const s = (p) => {
     z.style('border-radius', '4px')
     z.style('font-size', '28px')
     z.mousePressed(update_z)
-
-
 
     slider = p.createSlider(0.2,10,1,0.2)
     slider.position(0.79*p.windowWidth, 0.60*p.windowHeight)
@@ -421,9 +419,10 @@ const s = (p) => {
     close = p.createButton('X')
     close.size(0.02*p.windowWidth,0.02*p.windowWidth)
     close.style('border', 'none')
+    close.style('font-size', '20px')
     close.style('border-radius', '20px')
     close.style('background-color', p.color(40,40,40,255))
-    close.style('color', p.color(140,140,140,255))
+    close.style('color', p.color(180,180,180,255))
     close.mousePressed(help_info)
     p.pop()
   }
