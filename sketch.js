@@ -74,7 +74,7 @@ const s = (p) => {
   intro = function() {
     welcome = p.createDiv(
       '<img style="width:100%;display:block;margin-left:auto;margin-right:auto"" src="./pics/3D-VECTOR.png"/>' +
-      '<p style="font-size:30px;text-align:center"> Click the Help button for the user guide and instructions! </p>'
+      '<p style="font-size:30px;text-align:center"> Click the ? button for the user guide and instructions! </p>'
     )
     welcome.size(2/6*p.windowWidth,3/5*p.windowHeight)
     welcome.style('background', p.color(40,40,40,255))
@@ -156,10 +156,13 @@ const s = (p) => {
     sel.changed(mySelectEvent)
 
     sel.size(0.15*p.windowWidth,0.075*p.windowHeight)
-    sel.style('background-color', p.color(50,50,55,255))
-    sel.style('color', p.color(250,250,250,255))
+    sel.style('background-color', p.color(140,140,140,255))
+    sel.style('color', p.color(40,40,40,255))
     sel.style('padding-left', '10px')
     sel.style('border','none')
+    sel.style('font-family', "Helvetica")
+    sel.style('font-size', '17px')
+    sel.style('font-weight', '650')
   }
 
   mySelectEvent = function() {
@@ -316,27 +319,26 @@ const s = (p) => {
 
 
     slider = p.createSlider(0.2,10,1,0.2)
-    slider.position(0.78*p.windowWidth, 0.61*p.windowHeight)
+    slider.position(0.79*p.windowWidth, 0.60*p.windowHeight)
     slider.size(0.19*p.windowWidth,10)
     //slider.style()
     // s_val = p.createDiv(slider.value())
     // s_val.position(0.75*p.windowWidth, 520)
 
     slider1 = p.createSlider(1,3,1,1)
-    slider1.position(0.78*p.windowWidth, 0.66*p.windowHeight)
+    slider1.position(0.79*p.windowWidth, 0.65*p.windowHeight)
     slider1.size(0.19*p.windowWidth,10)
     // s_val1 = p.createDiv(slider1.value())
     // s_val1.position(0.75*p.windowWidth, 570)
 
-    help_button = p.createButton('Help?')
-    help_button.position(0.8*p.windowWidth, 0.85*p.windowHeight)
-    help_button.size(0.1*p.windowWidth, 50)
-    help_button.style('background-color', p.color(35,35,40,255))
+    help_button = p.createButton('?')
+    help_button.position(0.825*p.windowWidth, 0.85*p.windowHeight)
+    help_button.size(0.05*p.windowWidth, 50)
+    help_button.style('background-color', p.color(40,40,40,255))
     help_button.style('color', p.color(255,255,255))
     help_button.style('border', 'none')
     help_button.style('border-radius', '4px')
     help_button.style('font-size', '20px')
-    help_button.style('box-shadow', '0px 0px 1px 1px rgba(230,230,230,255)')
     help_button.mousePressed(help_info)
 
   }
