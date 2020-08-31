@@ -1,4 +1,4 @@
-# Vector-Fields
+# 3D Vector Fields Visualizer
 
 View at: https://priyyanshi.github.io/Vector-Fields/
 
